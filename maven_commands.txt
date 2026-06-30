@@ -1,0 +1,35 @@
+# Update package list and install Java 21 and tree
+apt-get update
+apt-get install -y openjdk-21-jdk tree git
+
+# Navigate to /opt, download and extract Maven
+cd /opt/
+wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+tar zxf apache-maven-3.6.3-bin.tar.gz
+
+# Set the PATH variable for the current session
+export PATH=$PATH:/opt/apache-maven-3.6.3/bin
+
+# Persist the PATH variable in .bashrc (so it survives a reboot)
+echo 'export PATH=$PATH:/opt/apache-maven-3.6.3/bin' >> ~/.bashrc
+
+# Check out the code
+git clone https://github.com/gkdevops/maven-code.git
+cd maven-code/
+
+
+# Maven default lifecycle, Phase 1: Compile
+# check what files are generated after compilation in target folder
+mvn compile
+
+# Maven default lifecycle, Phase 2: Test
+# check what files are generated after running tests in target folder
+mvn test
+
+# Maven default lifecycle, Phase 3: Test-Compile
+# check what files are generated after running test-compile in target folder
+mvn test-compile
+
+# Maven default lifecycle, Phase 4: Package
+# check what files are generated after running package in target folder
+mvn package
